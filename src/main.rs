@@ -2,6 +2,7 @@
 use std::env;
 use std::fs;
 use std::process;
+use std::error::Error;
 
 fn main() {
     //collect arguments from command line
@@ -18,16 +19,17 @@ fn main() {
     println!("Searching for => {}", config.query);
     println!("In file => {}", config.filename);
 
-    run(config)
-
-    //read file, save text to var, and print to console
-    
+    if let Err(e) = run(config) {
+        println!("Application error: {}", e);
+        process::exit(1);
+    }
 }
 
-fn run(config: Config) {
-    let contents = fs::read_to_string(config.filename)
-        .expect("Something went wrong with reading the file");
+//read file, save text to var, and print to console
+fn run(config: Config) -> Result<(), Box<dyn Error>>{
+    let contents = fs::read_to_string(config.filename)?;
     println!("With text:\n{}", contents);
+    Ok(())
 }
 
 struct Config {
