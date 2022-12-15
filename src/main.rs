@@ -18,9 +18,15 @@ fn main() {
     println!("Searching for => {}", config.query);
     println!("In file => {}", config.filename);
 
+    run(config)
+
     //read file, save text to var, and print to console
-    let contents =
-        fs::read_to_string(config.filename).expect("Something went wrong with reading the file");
+    
+}
+
+fn run(config: Config) {
+    let contents = fs::read_to_string(config.filename)
+        .expect("Something went wrong with reading the file");
     println!("With text:\n{}", contents);
 }
 
