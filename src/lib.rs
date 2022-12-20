@@ -26,12 +26,12 @@ impl Config {
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec< &'a str> {
     //TODO:
-    
+
     // 1. Iterate through each line of the contents.
-    let mut index = 0;
+    let mut index = 0; //dev only
     for line in contents.lines() {
-        index += 1;
-        println!("{}. {}", index, line);
+        index += 1; //dev only
+        println!("{}. {}", index, line); //dev only
         // do something
 
     }
