@@ -4,7 +4,10 @@ use std::error::Error;
 //read file, save text to var, and print to console
 pub fn run(config: Config) -> Result<(), Box<dyn Error>>{
     let contents = fs::read_to_string(config.filename)?;
-    println!("With text:\n{}", contents);
+    // using search function in run function.
+    for line  in search(&config.query, &contents) {
+        println!("{}", line);
+    }
     Ok(())
 }
 
