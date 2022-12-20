@@ -32,7 +32,7 @@ pub fn search_case_sensitive<'a>(query: &str, contents: &'a str) -> Vec< &'a str
     // 1. Iterate through each line of the contents.
     for line in contents.lines() {
         // 2. Check whether the line contains our query string.
-        if line.contains(query) {
+        if line.contains(query) { //contains() sig is for &str
                 // 3. If it does, add it to the list of values were returning.
             results.push(line);
             println!("line: {}, contains query: {}", line, query); //dev only
@@ -45,8 +45,15 @@ pub fn search_case_sensitive<'a>(query: &str, contents: &'a str) -> Vec< &'a str
 }
 
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    let query = query.to_lowercase(); //query is converted to String by to_lowercase.
     let mut results = Vec::new();
-    println!("query: {}, contents: {}", query, contents);
+
+    for line in contents.lines() {
+        if line.to_lowercase().contains(&query) { //becasue of conversion we need to reference as str slice now.
+            results.push(line);
+        }
+    }
+
     results
 }
 
@@ -73,10 +80,10 @@ Duct tape.";
     fn case_insensitive() {
         let query = "rUsT";
         let contents = "\
-    Rust:
-    safe, fast, productive.
-    Pick three.
-    Trust me.";
+Rust:
+safe, fast, productive.
+Pick three.
+Trust me.";
 
         assert_eq!(
             vec!["Rust:", "Trust me."],
