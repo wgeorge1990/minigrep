@@ -25,23 +25,18 @@ impl Config {
 }
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec< &'a str> {
-    //TODO:
     let mut results = Vec::new();
     // 1. Iterate through each line of the contents.
-    let mut index = 0; //dev only
     for line in contents.lines() {
-        index += 1; //dev only
-        println!("{}. {}", index, line); //dev only
+        // 2. Check whether the line contains our query string.
         if line.contains(query) {
+                // 3. If it does, add it to the list of values were returning.
             results.push(line);
             println!("line: {}, contains query: {}", line, query); //dev only
             // do something with line
         }
+        // 4. If it doesn't, do nothing.
     }
-
-    // 2. Check whether the line contains our query string.
-    // 3. If it does, add it to the list of values were returning.
-    // 4. If it doesn't, do nothing.
     // 5. Return the list of results that match.
     results
 }
