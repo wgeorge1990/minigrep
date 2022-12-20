@@ -32,7 +32,10 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec< &'a str> {
     for line in contents.lines() {
         index += 1; //dev only
         println!("{}. {}", index, line); //dev only
-        // do something
+        if line.contains(query) {
+            println!("line: {}, contains query: {}", line, query); //dev only
+            // do something
+        }
 
     }
 
