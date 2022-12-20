@@ -4,16 +4,25 @@ use std::error::Error;
 //read file, save text to var, and print to console
 pub fn run(config: Config) -> Result<(), Box<dyn Error>>{
     let contents = fs::read_to_string(config.filename)?;
+    
+    // implementing case_sensitive attribut on config
+    let results = if config.case_sensitive {
+        search_case_sensitive(&config.query, &contents)
+    } else {
+        search_case_insensitive(&config.query, &contents)
+    };
     // using search function in run function.
-    for line  in search_case_sensitive(&config.query, &contents) {
+    for line  in results {
         println!("{}", line);
     }
+
     Ok(())
 }
 
 pub struct Config {
     pub query: String,
     pub filename: String,
+    pub case_sensitive: bool,
 }
 
 impl Config {
